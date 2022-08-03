@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <% if(flashErrors && flashErrors.length> 0){ %>
+        <% for(const errorMessage of flashErrors) { %>
+            <p>ERROR flash: <%= errorMessage %>
+            </p>
+            <% } %>
+                <% } %>
+
+                    <% if(flashSuccess && flashSuccess.length> 0){ %>
+                        <% for(const successMessage of flashSuccess) { %>
+                            <p>SUCCESS flash: <%= successMessage %>
+                            </p>
+                            <% } %>
+                                <% } %>
+                                    <h1>
+                                        <%= product.title %>
+                                    </h1>
+                                    <p>
+                                        Made by: <%= product.author.username %>
+                                    </p>
+                                    <p>
+                                        <%= product.description %>
+                                    </p>
+                                    <p>
+                                        <%= product.price %>
+                                    </p>
+                                    <p>
+                                        <%= product.inStock %>
+                                    </p>
+                                    <a href="/products">Back to all products</a>
+                                    <a href="/products/<%= product._id%>/edit">Edit product</a>
+                                    <form action="/products/<%= product._id %>?_method=DELETE" method="POST">
+                                        <button>DELETE</button>
+                                    </form>
+
+                                    <h2>ADD TO CART</h2>
+                                    <form action="/cart?_method=PATCH" method="POST">
+                                        <input type="hidden" name="productId" value="<%= product._id %>">
+
+                                        <label for="quantity">Quantity:</label>
+                                        <input type="number" id="quantity" name="quantity" <% if(hasInCart){%>
+                                        value="<%= quantityInCart %>"
+                                            <% } else {%>
+                                                value="1"
+                                                <% }%>>
+
+                                                    <% if(hasInCart){%>
+                                                        <button>Update Qty</button>
+                                                        <% } else {%>
+                                                            <button>add to cart</button>
+                                                            <% }%>
+
+                                    </form>
+
+                                    <h2>REVIEWS</h2>
+                                    <ul>
+                                        <% for(const review of product.reviews){ %>
+                                            <li>
+                                                <h3>
+                                                    <%= review.title %>
+                                                </h3>
+                                                <p>
+                                                    Made by: <%= review.author.username %>
+                                                </p>
+                                                <p>
+                                                    <%= review.body %>
+                                                </p>
+                                                <p>
+                                                    <%= review.score %>
+                                                </p>
+                                                <form
+                                                    action="/products/<%= product._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                                    method="POST">
+                                                    <button>DELETE</button>
+                                                </form>
+                                            </li>
+                                            <% } %>
+                                    </ul>
+
+                                    <form action="/products/<%= product._id%>/reviews" method="POST">
+                                        <h2>LEAVE A REVIEW</h2>
+                                        <div>
+                                            <label for="title">title:</label>
+                                            <input type="text" id="title" name="title">
+                                        </div>
+                                        <div>
+                                            <label for="body">body:</label>
+                                            <input type="text" id="body" name="body">
+                                        </div>
+                                        <div>
+                                            <label for="score">score:</label>
+                                            <input type="number" id="score" name="score">
+                                        </div>
+                                        <button>Submit</button>
+                                    </form>
+</body>
+
+</html>

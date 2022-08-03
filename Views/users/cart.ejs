@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <% if(flashErrors && flashErrors.length> 0){ %>
+        <% for(const errorMessage of flashErrors) { %>
+            <p>ERROR flash: <%= errorMessage %>
+            </p>
+            <% } %>
+                <% } %>
+                    <% if(flashSuccess && flashSuccess.length> 0){ %>
+                        <% for(const successMessage of flashSuccess) { %>
+                            <p>SUCCESS flash: <%= successMessage %>
+                            </p>
+                            <% } %>
+                                <% } %>
+
+                                    <h1>CART</h1>
+                                    <h2>You have <%= cart.length %> items in your cart</h2>
+                                    <ul>
+                                        <% for(const orderItem of cart){ %>
+                                            <li>
+                                                <h3>
+                                                    <%= orderItem.product.title %>
+                                                </h3>
+                                            </li>
+                                            <!-- if user is logged in, then their is orderItem and we can put its id in the url
+                                                 if user is NOT logged in, there is not an actual order item so the route it will be
+                                                 hard coded as 00000. Note that the route handler will check for the difference, this
+                                                 this is just so we can actually hit the route because it expects a param after items/ -->
+
+                                            <form <% if(user){ %>
+                                                action="/cart/items/<%= orderItem._id %>?_method=DELETE"
+                                                    <% } else { %>
+                                                        action="/cart/items/00000?_method=DELETE"
+                                                        <% } %>
+                                                            method="POST">
+                                                            <input type="hidden" name="productId"
+                                                                value="<%= orderItem.product._id %>">
+
+                                                            <button>REMOVE</button>
+                                            </form>
+
+                                            <form action="/cart?_method=PATCH" method="POST">
+                                                <input type="hidden" name="productId"
+                                                    value="<%= orderItem.product._id %>">
+
+                                                <label for="quantity">Quantity:</label>
+                                                <input type="number" id="quantity" name="quantity"
+                                                    value="<%= orderItem.quantity %>">
+
+                                                <button>Update quantity</button>
+                                            </form>
+                                            <% } %>
+                                    </ul>
+                                    <form action="/checkout">
+                                        <button>CHECKOUT</button>
+                                    </form>
+</body>
+
+</html>

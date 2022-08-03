@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>
+        ORDER <%= order._id %>
+    </h2>
+    <p>total: <%= order.total %>
+    </p>
+
+    <% for (const item of order.items) { %>
+        <% if(item.productStillAvailable) { %>
+            <a href="/products/<%= item.product %>">
+                <h2>
+                    <%= item.productTitle %>
+                </h2>
+            </a>
+            <% } else { %>
+                <h2>
+                    <%= item.productTitle %>
+                </h2>
+                <p>Product no longer available</p>
+                <% } %>
+                    <p>
+                        <%= item.productPrice %>
+                    </p>
+                    <p>
+                        <%= item.quantity %>
+                    </p>
+                    <% } %>
+                        <a href="/orders">Back to all orders</a>
+                        <a href="/products">View all products</a>
+</body>
+
+</html>

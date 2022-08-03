@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <% if(flashErrors && flashErrors.length> 0){ %>
+        <% for(const errorMessage of flashErrors) { %>
+            <p>ERROR flash: <%= errorMessage %>
+            </p>
+            <% } %>
+                <% } %>
+
+                    <% if(flashSuccess && flashSuccess.length> 0){ %>
+                        <% for(const successMessage of flashSuccess) { %>
+                            <p>SUCCESS flash: <%= successMessage %>
+                            </p>
+                            <% } %>
+                                <% } %>
+                                    <% if(user) { %>
+                                        <p>
+                                            <%= user.username %> is logged in
+                                        </p>
+                                        <% } else { %>
+                                            <p>NOBODY is logged in</p>
+                                            <% } %>
+                                                <h1>All products</h1>
+                                                <ul>
+                                                    <% for(const product of products){ %>
+                                                        <li>
+                                                            <h2>
+                                                                <a href="/products/<%= product._id %>">
+                                                                    <%= product.title %>
+                                                                </a>
+                                                            </h2>
+                                                            <p>
+                                                                <%= product.description %>
+                                                            </p>
+                                                            <p>
+                                                                <%= product.price %>
+                                                            </p>
+                                                            <p>
+                                                                <%= product.inStock %>
+                                                            </p>
+                                                        </li>
+                                                        <% } %>
+                                                </ul>
+                                                <a href="/products/new">Make a New Product</a>
+                                                <% if(user) { %>
+                                                    <p>
+                                                    <form action="/logout" method="POST"><button>LOGOUT</button></form>
+                                                    <a href="/orders">VIEW YOUR ORDERS</a>
+                                                    </p>
+                                                    <% } else { %>
+                                                        <a href="/register">REGISTER</a>
+                                                        <a href="/login">LOGIN</a>
+                                                        <% } %>
+                                                            <a href="/cart">VIEW CART</a>
+
+
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    CHECKOUT FORM
+    todo how to make hasState false if checkbox is not selected
+    <form action="/orders" method="POST">
+        <div class="shipping-info">
+            <h2>shipping address</h2>
+            <label for="shipping-line-1">Line 1:</label>
+            <input type="text" id="shipping-line-1" name="shipping-line-1" required>
+
+            <label for="shipping-line-2">Line 2:</label>
+            <input type="text" id="shipping-line-2" name="shipping-line-2">
+
+            <label for="shipping-city">City:</label>
+            <input type="text" id="shipping-city" name="shipping-city" required>
+
+            <label for="shipping-has-state">Does your country have states?</label>
+            <input type="checkbox" name="shipping-has-state" id="shipping-has-state" value="true">
+
+            <label for="shipping-state">State:</label>
+            <input type="text" id="shipping-state" name="shipping-state">
+
+            <label for="shipping-zip">Zip Code:</label>
+            <input type="number" id="shipping-zip" name="shipping-zip" required>
+
+            <label for="shipping-country">Country</label>
+            <input type="text" id="shipping-country" name="shipping-country" required>
+
+            <label for="save-shipping">save shipping information?</label>
+            <input type="checkbox" name="save-shipping" id="save-shipping" value="true">
+        </div>
+        <div class="payment-info">
+            <h2>payment info</h2>
+            <label for="card-name">Name on card:</label>
+            <input type="text" id="card-name" name="card-name" required>
+
+            <label for="card-number">card number:</label>
+            <input type="number" id="card-number" name="card-number" required>
+
+            <label for="card-exp-month">card expiration month:</label>
+            <input type="Number" id="card-exp-month" name="card-exp-month" required>
+
+            <label for="card-exp-year">card expiration year:</label>
+            <input type="Number" id="card-exp-year" name="card-exp-year" required>
+
+            <label for="card-cvc">card cvc:</label>
+            <input type="Number" id="card-cvc" name="card-cvc" required>
+
+            <label for="save-payment">save payment information?</label>
+            <input type="checkbox" name="save-payment" id="save-payment" value="true">
+        </div>
+        <div class="billing-info">
+            <h2>billing address</h2>
+            <label for="use-shipping-twice">Same as shipping</label>
+            <input type="checkbox" name="use-shipping-twice" id="use-shipping-twice" value="true">
+
+            <label for="billing-line-1">Line 1:</label>
+            <input type="text" id="billing-line-1" name="billing-line-1">
+
+            <label for="billing-line-2">Line 2:</label>
+            <input type="text" id="billing-line-2" name="billing-line-2">
+
+            <label for="billing-city">City:</label>
+            <input type="text" id="billing-city" name="billing-city">
+
+            <label for="billing-state">State:</label>
+            <input type="text" id="billing-state" name="billing-state">
+
+            <label for="billing-zip">Zip Code:</label>
+            <input type="number" id="billing-zip" name="billing-zip">
+
+            <label for="billing-country">Country</label>
+            <input type="text" id="billing-country" name="billing-country">
+
+            <label for="save-billing">save billing information?</label>
+            <input type="checkbox" name="save-billing" id="save-billing" value="true">
+        </div>
+
+        <button>submit</button>
+    </form>
+</body>
+
+</html>

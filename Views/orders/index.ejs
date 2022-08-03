@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <% if(flashErrors && flashErrors.length> 0){ %>
+        <% for(const errorMessage of flashErrors) { %>
+            <p>ERROR flash: <%= errorMessage %>
+            </p>
+            <% } %>
+                <% } %>
+
+                    <% if(flashSuccess && flashSuccess.length> 0){ %>
+                        <% for(const successMessage of flashSuccess) { %>
+                            <p>SUCCESS flash: <%= successMessage %>
+                            </p>
+                            <% } %>
+                                <% } %>
+                                    <h1>YOUR ORDERS: </h1>
+                                    <ul>
+                                        <% if(orders.length===0) { %>
+                                            <li>
+                                                <p>you have no orders</p>
+                                            </li>
+                                            <% } %>
+                                                <% for(const order of orders){ %>
+                                                    <li>
+                                                        <h2>
+                                                            <a href="/orders/<%= order._id %>">
+                                                                ORDER <%= order._id %>
+                                                            </a>
+                                                        </h2>
+                                                        <p>total: <%= order.total %>
+                                                        </p>
+
+                                                        <% for (const item of order.items) { %>
+                                                            <p>
+                                                                <%= item.productTitle %>
+                                                            </p>
+                                                            <p>
+                                                                <%= item.productPrice %>
+                                                            </p>
+                                                            <p>
+                                                                <%= item.quantity %>
+                                                            </p>
+                                                            <% } %>
+                                                    </li>
+                                                    <% } %>
+                                    </ul>
+
+</body>
+
+</html>
